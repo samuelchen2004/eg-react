@@ -11,7 +11,7 @@
     "build-dist": "rm -f umd/* && cd build && cp static/js/*.js ../umd/epgg.js && cp static/css/*.css ../umd/epgg.css && cp *worker.js ../umd/ && cd ../umd && sed -i ''  's//browser/./g' *.js",
     "build-storybook": "build-storybook -s public",
     "eject": "react-scripts-ts eject",
-    "start": "react-app-rewired start --scripts-version react-scripts-ts",
+    "start": "react-app-rewired --max-old-space-size=8192 start --scripts-version react-scripts-ts",
     "storybook": "start-storybook -p 9009 -s public",
     "test": "react-app-rewired test --env=jsdom --scripts-version react-scripts-ts",
     "deploy": "aws s3 sync ~/eg-react/frontend/build/ s3://epigenomegateway.org/browser/ --delete",
