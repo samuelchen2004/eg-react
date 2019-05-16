@@ -37,7 +37,7 @@ interface SpeciesConfig {
 export const treeOfLife: {[speciesName: string]: SpeciesConfig} = {
     human: {
         logoUrl: 'https://epigenomegateway.wustl.edu/browser/images/Human.png',
-        assemblies: [ HG19.genome.getName(), HG38.genome.getName() ],
+        assemblies: [ HG38.genome.getName() ],
         color: 'white',
     },
     chimp: {
@@ -47,7 +47,7 @@ export const treeOfLife: {[speciesName: string]: SpeciesConfig} = {
     },
     mouse: {
         logoUrl: 'https://epigenomegateway.wustl.edu/browser/images/Mouse.png',
-        assemblies: [ MM10.genome.getName(), MM9.genome.getName() ],
+        assemblies: [ MM10.genome.getName() ],
         color: 'yellow',
     },
     rat: {
@@ -63,7 +63,7 @@ export const treeOfLife: {[speciesName: string]: SpeciesConfig} = {
     "little brown bat": {
         logoUrl: 'https://wangftp.wustl.edu/~xzhuo/bat_genomes/littleBrownBat.png',
         assemblies: [ MYOLUC2.genome.getName() ],
-        color: 'white',
+        color: 'black',
     },
 
 };
