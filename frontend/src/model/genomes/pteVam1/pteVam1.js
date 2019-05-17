@@ -3,7 +3,7 @@ import Genome from '../Genome';
 import TrackModel from '../../TrackModel';
 import cytobands from './cytoBand.json';
 import annotationTracks from "./annotationTracks.json";
-import chromSize from "./pteVam1.chromSize.json";
+import chromSize from "./chromSize.json";
 
 const allSize = chromSize.map(genom => new Chromosome(genom.chr, genom.size));
 const genome = new Genome("pteVam1", allSize);
