@@ -39,15 +39,6 @@ import { GenomeConfig } from "./GenomeConfig";
 /**
  * All available genomes.
  */
-<<<<<<< HEAD
-export const allGenomes = [
-    HG38,
-    MM10,
-    PANTRO5,
-    RN6,
-    MYOLUC2,
-    PTEVAM1
-=======
 export const allGenomes = [  // order matters, shows same order in genome list after click genome logo
   HG38,
   HG19,
@@ -83,7 +74,8 @@ export const allGenomes = [  // order matters, shows same order in genome list a
   PANTRO6,
   Pfal3D7,
   Creinhardtii506,
->>>>>>> 16a0d4bac5360c270a754d0038a9b64aa7a382fe
+  MYOLUC2,
+  PTEVAM1
 ];
 
 const genomeNameToConfig = {};
@@ -102,40 +94,6 @@ interface SpeciesConfig {
     color: string;
 }
 
-<<<<<<< HEAD
-export const treeOfLife: {[speciesName: string]: SpeciesConfig} = {
-    human: {
-        logoUrl: 'https://epigenomegateway.wustl.edu/browser/images/Human.png',
-        assemblies: [ HG38.genome.getName() ],
-        color: 'white',
-    },
-    chimp: {
-        logoUrl: 'https://epigenomegateway.wustl.edu/browser/images/Chimp.png',
-        assemblies: [ PANTRO5.genome.getName() ],
-        color: 'white',
-    },
-    mouse: {
-        logoUrl: 'https://epigenomegateway.wustl.edu/browser/images/Mouse.png',
-        assemblies: [ MM10.genome.getName() ],
-        color: 'yellow',
-    },
-    rat: {
-        logoUrl: 'https://epigenomegateway.wustl.edu/browser/images/Rat.png',
-        assemblies: [ RN6.genome.getName() ],
-        color: 'white',
-    },
-    "large flying fox": {
-        logoUrl: 'https://wangftp.wustl.edu/~xzhuo/bat_genomes/flyingFox.png',
-        assemblies: [ PTEVAM1.genome.getName() ],
-        color: 'white',
-    },
-    "little brown bat": {
-        logoUrl: 'https://wangftp.wustl.edu/~xzhuo/bat_genomes/littleBrownBat.png',
-        assemblies: [ MYOLUC2.genome.getName() ],
-        color: 'black',
-    },
-
-=======
 export const treeOfLife: { [speciesName: string]: SpeciesConfig } = {
   human: {
     logoUrl: "https://epigenomegateway.wustl.edu/browser/images/Human.png",
@@ -238,12 +196,21 @@ export const treeOfLife: { [speciesName: string]: SpeciesConfig } = {
       assemblies: [Creinhardtii506.genome.getName()],
       color: "yellow",
   },
+  "large flying fox": {
+    logoUrl: 'https://wangftp.wustl.edu/~xzhuo/bat_genomes/flyingFox.png',
+    assemblies: [ PTEVAM1.genome.getName() ],
+    color: 'white',
+  },
+"little brown bat": {
+    logoUrl: 'https://wangftp.wustl.edu/~xzhuo/bat_genomes/littleBrownBat.png',
+    assemblies: [ MYOLUC2.genome.getName() ],
+    color: 'black',
+  },
   virus: {
       logoUrl: "https://vizhub.wustl.edu/public/virus/virus.png",
       assemblies: [nCoV2019.genome.getName(), MERS.genome.getName(), SARS.genome.getName(), Ebola.genome.getName()],
       color: "yellow",
   },
->>>>>>> 16a0d4bac5360c270a754d0038a9b64aa7a382fe
 };
 
 /**
