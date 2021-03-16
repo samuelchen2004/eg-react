@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { firebaseConnect, isLoaded, isEmpty, getVal } from 'react-redux-firebase';
+import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { ActionCreators } from "../AppState";
 import { Link } from "react-router-dom";
+import { notify } from 'react-notify-toast';
 import App from "../App";
 import { AppStateSaver } from '../model/AppSaveLoad';
 
@@ -18,14 +19,15 @@ class Live extends React.Component {
         }
     }
 
-    async componentWillReceiveProps(nextProps) {
+    async UNSAFE_componentWillReceiveProps(nextProps) {
         const {firebase, browser} = this.props;
         const { liveId } = this.props.match.params;
         if(nextProps.browser.present !== browser.present) {
             const nextObj = new AppStateSaver().toObject(nextProps.browser.present);
+            const cleanedObj = JSON.parse(JSON.stringify(nextObj));
             try {
                 await firebase.update(`live/${liveId}/`, {
-                        present: nextObj,
+                        present: cleanedObj,
                     }
                 );
             } catch (error) {

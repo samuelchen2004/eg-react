@@ -6,6 +6,7 @@ import { withTrackData } from './trackContainers/TrackDataManager';
 import { withTrackView } from './trackContainers/TrackViewManager';
 import { TrackHandle } from './trackContainers/TrackHandle';
 import { withTrackLegendWidth } from './withTrackLegendWidth';
+import { getTrackConfig } from './trackConfig/getTrackConfig';
 
 function mapStateToProps(state) {
     return {
@@ -28,7 +29,7 @@ class ScreenshotUINotConnected extends React.Component {
     // https://stackoverflow.com/questions/39374157/angular-save-file-as-csv-result-in-failed-network-error-only-on-chrome
     
     svgDataURL = (svg) => {
-      const svgAsXML = (new XMLSerializer).serializeToString(svg);
+      const svgAsXML = (new XMLSerializer()).serializeToString(svg);
       return "data:image/svg+xml," + encodeURIComponent(svgAsXML);
     }
 
@@ -61,6 +62,16 @@ class ScreenshotUINotConnected extends React.Component {
                 labelSvg.setAttributeNS(null,"y",y+14 + ""); 
                 labelSvg.setAttributeNS(null,"font-size","12px");
                 const textNode = document.createTextNode(trackLabelText);
+                labelSvg.appendChild(textNode);
+                svgElemg.appendChild(labelSvg);
+            }
+            const chrLabelText = ele.children[0].querySelector(".TrackLegend-chrLabel").textContent;
+            if (chrLabelText) {
+                const labelSvg = document.createElementNS(xmlns,"text");
+                labelSvg.setAttributeNS(null,"x",x+15 + "");     
+                labelSvg.setAttributeNS(null,"y",y+33 + ""); 
+                labelSvg.setAttributeNS(null,"font-size","12px");
+                const textNode = document.createTextNode(chrLabelText);
                 labelSvg.appendChild(textNode);
                 svgElemg.appendChild(labelSvg);
             }
@@ -155,11 +166,11 @@ class ScreenshotUINotConnected extends React.Component {
         const boxHeight = tracks.reduce( (acc, cur) => acc + cur.clientHeight, 11 * tracks.length );
         const boxWidth = tracks[0].clientWidth;
         // create a new jsPDF instance
-        const pdf = new jsPDF('l', 'px', [boxWidth, boxHeight]);
+        const pdf = new window.jsPDF('l', 'px', [boxWidth, boxHeight]);
         const pdfContainer = document.getElementById('pdfContainer');
         pdfContainer.innerHTML = svgContent;
         // render the svg element
-        svg2pdf(pdfContainer.firstElementChild, pdf, {
+        window.svg2pdf(pdfContainer.firstElementChild, pdf, {
             xOffset: 0,
             yOffset: 0,
             scale: 1
@@ -179,10 +190,10 @@ class ScreenshotUINotConnected extends React.Component {
 
     makeSvgTrackElements() {
         const {tracks, trackData, primaryView, metadataTerms, viewRegion} = this.props;
-        const trackSvgElements = tracks.map((trackModel, index) => {
+        const trackSvgElements = tracks.filter(track => !getTrackConfig(track).isDynamicTrack()).map((trackModel, index) => {
             const id = trackModel.getId();
             const data = trackData[id];
-            return <TrackHandle
+            return primaryView ? <TrackHandle
                 key={trackModel.getId()}
                 trackModel={trackModel}
                 {...data}
@@ -195,7 +206,7 @@ class ScreenshotUINotConnected extends React.Component {
                 forceSvg={true}
                 selectedRegion={viewRegion}
                 zoomAnimation={0}
-            />
+            />: null;
         });
         return trackSvgElements;
     }
